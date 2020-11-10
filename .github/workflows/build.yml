@@ -18,6 +18,12 @@ jobs:
     - name: Check out repo
       uses: actions/checkout@v2
 
+    - name: Setup Rust nightly
+      run: |
+        curl https://sh.rustup.rs -sSf > rustup.sh
+        chmod +x rustup.sh
+        ./rustup.sh --default-toolchain nightly --profile minimal -y
+
     - name: Install missing dependencies
       run: |
         sudo apt update
