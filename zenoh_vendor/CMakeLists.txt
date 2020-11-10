@@ -44,4 +44,9 @@ ExternalProject_Add(zenoh-c-${ZENOH_C_TAG}
 
 install(DIRECTORY cmake DESTINATION share/${PROJECT_NAME})
 
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
 ament_package(CONFIG_EXTRAS "zenoh_vendor-extras.cmake")
