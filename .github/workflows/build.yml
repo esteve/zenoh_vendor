@@ -18,17 +18,18 @@ jobs:
     - name: Check out repo
       uses: actions/checkout@v2
 
+    - name: Install missing dependencies
+      run: |
+        sudo apt-get update
+        apt-get install -y curl
+        rosdep update
+        DEBIAN_FRONTEND=noninteractive rosdep install --from-paths . --ignore-src --rosdistro foxy -y
+
     - name: Setup Rust nightly
       run: |
         curl https://sh.rustup.rs -sSf > rustup.sh
         chmod +x rustup.sh
         ./rustup.sh --default-toolchain nightly --profile minimal -y
-
-    - name: Install missing dependencies
-      run: |
-        sudo apt update
-        rosdep update
-        DEBIAN_FRONTEND=noninteractive rosdep install --from-paths . --ignore-src --rosdistro foxy -y
 
     - name: Build
       run: |
