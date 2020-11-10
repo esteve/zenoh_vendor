@@ -34,6 +34,7 @@ jobs:
     - name: Build
       run: |
         . /opt/ros/foxy/setup.sh
+        . ${HOME}/.cargo/env
         colcon build --event-handlers console_cohesion+
 
     - name: Run tests
